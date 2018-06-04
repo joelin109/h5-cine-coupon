@@ -1,6 +1,5 @@
 const path = require("path");
 const webpack = require("webpack");
-const proMode = process.env.NODE_ENV === "production";
 
 module.exports = {
   cache: true,
@@ -18,13 +17,17 @@ module.exports = {
       {
         test: /\.js$/,
         loader: "babel-loader",
-        include: path.resolve(__dirname, "src"),
+        include: path.resolve(__dirname, "src")
       }
     ]
   },
   stats: {
     colors: true
   },
-
-  devtool: "cheap-module-source-map"
+  plugins: [
+    new webpack.DllReferencePlugin({
+      context: __dirname,
+      manifest: require("./www/vendor/manifest-vendor-dll.json")
+    })
+  ]
 };

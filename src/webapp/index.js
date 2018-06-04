@@ -6,7 +6,7 @@ class Index extends React.Component {
     render() {
 
         return (
-           <div> im joe </div>
+           <div> im new joe</div>
         );
     }
 }
