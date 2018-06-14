@@ -17,6 +17,10 @@ function httpBody(bodyData) {
   let sitecode = storeUtil.getSiteCode();
   let token = storeUtil.getToken();
 
+  if (!token && window.Token) {
+    token = window.Token;
+  }
+
   return {
     token: token,
     sitecode: sitecode,
@@ -31,7 +35,7 @@ export let post = (url, data) => {
   let _apiURL = httpUrl(url);
   let _httpBody = httpBody(data);
 
-  // alert(_apiURL)
+  //alert(JSON.stringify(_httpBody))
   return axios.post(_apiURL, _httpBody).then(response => response.data);
 };
 

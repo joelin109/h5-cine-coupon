@@ -1,64 +1,72 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import ListItemText from "@material-ui/core/ListItemText";
-import Checkbox from "@material-ui/core/Checkbox";
-import IconButton from "@material-ui/core/IconButton";
+import UserCouponList from "./coupon";
+import UserSearch from "./userSearch";
+import UserDesc from "./userDesc";
+import {
+  userAction,
+  userCouponAction as couponAction
+} from "@/action/userAction";
 
-const cName = {
-  width: "50%",
-  maxWidth: "360px",
-};
-
-class CheckboxList extends React.Component {
+class User extends React.Component {
   state = {
-    checked: [0]
+    user: {},
+    coupons: []
   };
 
-  handleToggle = value => () => {
-    const { checked } = this.state;
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-
+  handleChange = event => {
     this.setState({
-      checked: newChecked
+      query: event.target.value
     });
   };
 
+  handleQuery = async query => {
+    let { err, user } = await userAction.queryAccount(query);
+    if (err) {
+      alert(err);
+    } else {
+      const { error, result } = await couponAction.couponList(user.id);
+      this.setState({
+        user,
+        coupons: result
+      });
+    }
+  };
+
+  handleMerge = async checkeds => {
+    if (checkeds.length < 2) {
+      alert("请选择2个以上优惠券");
+      return;
+    }
+
+    let data = {
+      user_id: this.state.user.id,
+      coupons: checkeds
+    };
+
+    const { error, result } = await couponAction.couponMerge(data);
+    if (error) {
+      alert(error);
+    } else {
+      this.setState({ coupons: result });
+    }
+  };
+
   render() {
+    const newUserCouponList = <UserCouponList coupons={this.state.coupons} />;
     return (
-      <div className= {cName} >
-        <List>
-          {[0, 1, 2, 3].map(value => (
-            <ListItem
-              key={value}
-              role={undefined}
-              dense
-              button
-              onClick={this.handleToggle(value)}
-            >
-              <Checkbox
-                checked={this.state.checked.indexOf(value) !== -1}
-                tabIndex={-1}
-                disableRipple
-                color="primary"
-              />
-              <ListItemText primary={`Line item ${value + 1}`} />
-            </ListItem>
-          ))}
-        </List>
-      </div>
+      <React.Fragment>
+        <UserSearch action={this.handleQuery} />
+        <div>
+          <UserDesc user={this.state.user} />
+          <UserCouponList
+            coupons={this.state.coupons}
+            action={this.handleMerge}
+          />
+        </div>
+      </React.Fragment>
     );
   }
 }
 
-export default CheckboxList;
+export default User;
