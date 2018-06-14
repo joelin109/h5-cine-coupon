@@ -3,8 +3,8 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import { CIcon } from "./_icon";
 
-export const CIconButton = ({ id, ...props }) => {
-  const icon = <CIcon name={id} />;
+export const CIconButton = ({ text, iconName, ...props }) => {
+  const icon = <CIcon name={iconName} />;
   return <IconButton {...props}> {icon} </IconButton>;
 };
 
@@ -16,11 +16,11 @@ export const CButton = ({ text, ...props }) => {
   );
 };
 
-export const CFlatButton = props => {
+export const CFlatButton = ({ text, ...props }) => {
   return <Button {...props} />;
 };
 
-export const CFloatingActionButton = ({ text, iconName, ...props }) => {
+export const CFloatingButton = ({ text, iconName, ...props }) => {
   const icon = <CIcon name={iconName} />;
   return (
     <Button variant="fab" color="secondary" {...props}>

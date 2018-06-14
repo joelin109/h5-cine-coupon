@@ -1,15 +1,15 @@
-import { CButton, CFlatButton, CFloatingActionButton, CIconButton } from "./_button";
+import { CButton, CFlatButton, CIconButton, CFloatingButton } from "./_button";
 import { CIcon } from "./_icon";
 import { CTextField } from "./_textField";
-import { CCheckbox } from "./_checkbox";
+import { CCheckbox, CCheckboxGroup } from "./_checkbox";
 import  CDialog  from "./_dialog";
 
 export {
   CIcon,
   CButton,
-  CIconButton,
   CFlatButton,
-  CFloatingActionButton,
+  CIconButton,
+  CFloatingButton,
   CTextField,
   CCheckbox,
   CDialog

@@ -33,9 +33,9 @@ function Header(props) {
           <Typography variant="C" color="inherit" className={classes.flex}>
            <div className = "header-text"> {cine} </div>
           </Typography>
-          <CIconButton id="search" />
-          <CIconButton id="person" />
-          <CIconButton id="home" />
+          <CIconButton iconName="search" />
+          <CIconButton iconName="person" />
+          <CIconButton iconName="home" />
         </Toolbar>
       </AppBar>
     </div>
