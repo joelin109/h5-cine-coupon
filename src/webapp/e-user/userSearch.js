@@ -20,7 +20,6 @@ class UserSearch extends React.Component {
     return (
       <div className="body-root-search">
         <CTextField
-          id="query"
           placeholder="请输入用户账号"
           value={this.state.query}
           onChange={this.handleChange}

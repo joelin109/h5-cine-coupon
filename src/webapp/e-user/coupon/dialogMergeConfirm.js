@@ -1,7 +1,6 @@
 import React from "react";
 import { CButton, CDialog } from "@/component/_base";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 
 class DialogMergeConfirm extends React.Component {
   state = {
@@ -35,11 +34,7 @@ class DialogMergeConfirm extends React.Component {
           onCancel={this.handleClose}
           onConfirm={this.handleConfirm}
         >
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              确认优惠券进行合并，请点击“确定”
-            </DialogContentText>
-          </DialogContent>
+          <DialogContent>确认优惠券进行合并，请点击“确定”</DialogContent>
         </CDialog>
       </div>
     );
