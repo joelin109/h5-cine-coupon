@@ -1,8 +1,11 @@
 import { CButton, CFlatButton, CIconButton, CFloatingButton } from "./_button";
 import { CIcon } from "./_icon";
-import { CTextField } from "./_textField";
+import { CTextField, CMultiTextField } from "./_textField";
 import { CCheckbox, CCheckboxGroup } from "./_checkbox";
+import  CRadioGroup  from "./_radioGroup";
+import  CCard  from "./_card";
 import  CDialog  from "./_dialog";
+import  CDialogConfirm  from "./_dialogConfirm";
 
 export {
   CIcon,
@@ -11,6 +14,10 @@ export {
   CIconButton,
   CFloatingButton,
   CTextField,
+  CMultiTextField,
   CCheckbox,
-  CDialog
+  CRadioGroup,
+  CCard,
+  CDialog,
+  CDialogConfirm
 };
